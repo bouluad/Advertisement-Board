@@ -1,6 +1,6 @@
-/home/nassim/workspace/TLC/appengine-java-guestbook-multiphase/final/src/main/java/com/example/guestbook/OfyHelper.java
-/home/nassim/workspace/TLC/appengine-java-guestbook-multiphase/final/src/main/java/com/example/guestbook/SignGuestbookServlet.java
-/home/nassim/workspace/TLC/appengine-java-guestbook-multiphase/final/src/main/java/com/example/guestbook/Guestbook.java
-/home/nassim/workspace/TLC/appengine-java-guestbook-multiphase/final/src/main/java/com/example/guestbook/Greeting.java
-/home/nassim/workspace/TLC/appengine-java-guestbook-multiphase/final/src/main/java/com/example/guestbook/Upload.java
-/home/nassim/workspace/TLC/appengine-java-guestbook-multiphase/final/src/main/java/com/example/guestbook/CloudUploadServlet.java
+/home/bouluad/Bureau/TP1-TLC/tp1_tlc/src/main/java/com/example/guestbook/OfyHelper.java
+/home/bouluad/Bureau/TP1-TLC/tp1_tlc/src/main/java/com/example/guestbook/Upload.java
+/home/bouluad/Bureau/TP1-TLC/tp1_tlc/src/main/java/com/example/guestbook/CloudUploadServlet.java
+/home/bouluad/Bureau/TP1-TLC/tp1_tlc/src/main/java/com/example/guestbook/Guestbook.java
+/home/bouluad/Bureau/TP1-TLC/tp1_tlc/src/main/java/com/example/guestbook/Greeting.java
+/home/bouluad/Bureau/TP1-TLC/tp1_tlc/src/main/java/com/example/guestbook/SignGuestbookServlet.java

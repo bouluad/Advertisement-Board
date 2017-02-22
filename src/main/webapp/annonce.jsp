@@ -1,136 +1,175 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%@ page import="java.util.List"%>
-<%@ page import="com.google.appengine.api.blobstore.*"%>
-<%@ page import="com.example.guestbook.Upload"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.example.guestbook.Upload" %>
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreService" %>
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreServiceFactory" %>
+<%@ page import="java.util.List" %>
 
 <%
     BlobstoreService blobstoreService = BlobstoreServiceFactory
             .getBlobstoreService();
 %>
 
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Annonces Cloud </title>
-    <meta charset="utf-8" />
+    <title>Cloud Uploader</title>
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/stylesheets/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="/stylesheets/css/main.css" rel="stylesheet" media="screen">
+    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/dashboard.css"/>
+    <!-- Bootstrap core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <script src="../../assets/js/ie8-responsive-file-warning.js"></script>
+    <![endif]-->
+    <script src="../../js/ie-emulation-modes-warning.js"></script>
 </head>
 <body>
 
-<div class="container-narrow">
+<div class="container">
 
-    <div class="masthead">
+    <div class="header clearfix">
         <ul class="nav nav-pills pull-right">
             <li class="active"><a href="/">Accueil</a></li>
-            <li><a href="#list">Les annonces </a></li>
-            <li><a href="#upload">Upload annonce</a></li>
+            <li><a href="#list">Liste des annonces</a></li>
+            <li><a href="#upload">Ajouter</a></li>
         </ul>
-        <h3 class="muted">Annonces Uploader</h3>
+        <h3 class="text-muted">Advertisement Board</h3>
     </div>
 
-    <div class="row-fluid iconlist" id="list">
+    <hr/>
 
-        <h2>Liste des annonces</h2>
+    <div class="jumbotron">
+        <h1>
+            Vos annonce<br/>dans Advertisement Board
+        </h1>
+        <p class="lead">En un clic, ajouter votre annonce!</p>
+        <a class="btn btn-large btn-success" href="#upload">Ajouter une annonce</a>
+    </div>
 
-        <p>
-            <span class="label">Note</span> Seules les 9 dernières icônes
-            uploadées sont présentées ici.
-        </p>
+    <hr/>
 
-        <%
-            List<Upload> uploads = (List<Upload>) request.getAttribute("uploads");
-            if (uploads.size() == 0) {
-        %>
 
-        <p>
-            <em>Aucune annonce uploadée</em>
-        </p>
-
-        <%
-        }
-        else {
-            int i = 0;
-            for (Upload upload : uploads) {
-                if ((i % 3) == 0) {
-        %>
+    <div class="container-fluid">
         <div class="row">
-            <% } %>
 
-            <div class="span4">
-                <figure>
-                    <img src="<%=upload.getUrl()%>" alt="Image utilisateur"
-                         class="img-polaroid" style="max-width: 100px;" />
-                    <figcaption>
-                        <a class="close" href="/?delete=<%=upload.getKeyString() %>">&times;</a>
 
-                    </figcaption>
-                    <div>
-                        <p>
-                            <%=upload.getTitre()%>
-                        </p>
-                        <p>
-                            <%=upload.getDescription()%>
-                        </p>
-                        <p>
-                            <%=upload.getPrix()%> €
-                        </p>
-                        <p>
-                            <%=upload.getDate()%>
-                        </p>
-                    </div>
+            <div class="row-fluid iconlist" id="list">
 
-                </figure>
+                <h2>Liste des annonces</h2>
+
+                <p>
+                    <span class="label">Note</span> Seules les 9 dernières icônes
+                    uploadées sont présentées ici.
+                </p>
+
+
+                <%
+                    List<Upload> uploads = (List<Upload>) request.getAttribute("uploads");
+                    if (uploads.size() == 0) {
+                %>
+
+                <p>
+                    <em>Aucune annonce uploadée</em>
+                </p>
+
+                <%
+                } else {
+                %>
+
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Titre</th>
+                            <th>Description</th>
+                            <th>Prix</th>
+                            <th>Date</th>
+                            <th>Supprimer</th>
+                        </tr>
+                        </thead>
+
+                        <%
+                            for (Upload upload : uploads) {
+
+                        %>
+                        <div class="row">
+
+
+                            <tbody>
+                            <tr>
+                                <td><img src="<%=upload.getUrl()%>" alt="Image utilisateur"
+                                         class="img-polaroid" style="max-height: 100px; max-width: 100px;"/></td>
+                                <td><%=upload.getTitre()%>
+                                </td>
+                                <td><%=upload.getDescription()%>
+                                </td>
+                                <td><%=upload.getPrix()%> €</td>
+                                <td><%=upload.getDate()%>
+                                </td>
+                                <td>
+                                    <figcaption>
+                                        <a class="close" href="/?delete=<%=upload.getKeyString() %>">&times;</a>
+                                    </figcaption>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                                <%
+                                    }
+                                }%>
+
+
+                    </table>
+                </div>
+
             </div>
 
-            <%
-                if ((i % 3) == 2 || i == uploads.size() - 1) {
-            %>
         </div>
-        <%			}
-            i++;
-        }
-        }%>
+
+        <hr/>
+
+        <div class="row-fluid iconlist" id="upload">
+
+
+            <h2>Ajouter une annonce</h2>
+
+
+            <form action="<%= blobstoreService.createUploadUrl("/") %>" method="post" enctype="multipart/form-data">
+
+                <table>
+
+                    <tr>
+                        <th><label>Image </label></th>
+                        <td><input type="file" name="uploadedFile"/></td>
+                    </tr>
+
+                    <tr>
+                        <th><label>Titre </label></th>
+                        <td><input type="text" name="titre"/></td>
+                    </tr>
+                    <tr>
+                        <th><label>Description </label></th>
+                        <td>
+                            <textarea name="description" rows="3" cols="60"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><label>Prix </label></th>
+                        <td><input type="text" name="prix"/></td>
+                    </tr>
+                </table>
+
+                <div class="form-actions">
+                    <input class="btn btn-large btn-success" type="submit" class="btn"/>
+                </div>
+            </form>
+
+        </div>
 
     </div>
-
-    <hr />
-
-    <div class="row-fluid iconlist" id="upload">
-
-        <h2>Uploader une annonce</h2>
-
-        <form action="<%= blobstoreService.createUploadUrl("/") %>" method="post" enctype="multipart/form-data">
-
-            <div>
-                <p>
-                    <label>Fichier à envoyer : <input type="file" name="uploadedFile" /></label> <br/>
-                </p>
-
-                <p>
-                <label>Titre de l'annonce : <input type="text" name="titre" /></label> <br/>
-                </p>
-
-                <p>
-                <label>Prix : <input type="text" name="prix" /></label> <br/>
-                </p>
-
-                <p>
-                <label>Description :<textarea name="description" rows="3" cols="60"></textarea>
-                </label> <br/>
-                </p>
-            </div>
-
-
-            <div class="form-actions">
-                <input type="submit" class="btn" />
-            </div> <br/>
-        </form>
-    </div>
-
 </div>
-<script src="http://code.jquery.com/jquery.js"></script>
-<script src="/stylesheets/js/bootstrap.min.js"></script>
 </body>
 </html>
