@@ -6,7 +6,7 @@
 <%@ page import="com.google.appengine.api.users.UserService" %>
 <%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
 <%@ page import="java.util.List" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
     BlobstoreService blobstoreService = BlobstoreServiceFactory
             .getBlobstoreService();
@@ -16,7 +16,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Cloud Uploader</title>
+    <title>Advertisement Board</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="/stylesheets/main.css"/>
@@ -45,12 +45,12 @@
                     pageContext.setAttribute("user", user);
             %>
 
-            <li><a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">Déconnexion</a></li>
+            <li><a href="<%= userService.createLogoutURL("/") %>">Déconnexion</a></li>
 
             <%
             } else {
             %>
-            <li><a href="<%= userService.createLoginURL(request.getRequestURI()) %>">se connecter</a></li>
+            <li><a href="<%= userService.createLoginURL("/") %>">se connecter</a></li>
             <%
                 }
             %>
