@@ -126,6 +126,7 @@
                             <th>Description</th>
                             <th>Prix</th>
                             <th>Date</th>
+                            <th>Mail</th>
                             <th>Supprimer</th>
                         </tr>
                         </thead>
@@ -147,6 +148,8 @@
                                 </td>
                                 <td><%=upload.getPrix()%> €</td>
                                 <td><%=upload.getDate()%>
+                                </td>
+                                <td><%=upload.getAuthor_email()%>
                                 </td>
                                 <td>
                                     <figcaption>

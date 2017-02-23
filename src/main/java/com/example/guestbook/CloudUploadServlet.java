@@ -40,6 +40,7 @@ public class CloudUploadServlet extends HttpServlet {
         if (req.getParameter("delete") != null) {
             BlobKey deleteUploadData = new BlobKey(req.getParameter("delete"));
             Upload deleteUploadInfos = ofy().load().type(Upload.class).filter("key", deleteUploadData).first().now();
+            deleteUploadInfos.setAuthor_email(user.getEmail());
             if (deleteUploadInfos != null) {
                 blobstoreService.delete(deleteUploadData);
                 ofy().delete().entity(deleteUploadInfos).now();
@@ -53,11 +54,14 @@ public class CloudUploadServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
         BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+        UserService userService = UserServiceFactory.getUserService();
+        User user = userService.getCurrentUser();  // Find out who the user is.
 
         Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(req);
         List<BlobKey> blobKeys = blobs.get("uploadedFile");
 
         Upload uploadTitre = new Upload(blobKeys.get(0), req.getParameter("titre"), req.getParameter("description"), req.getParameter("prix"));
+        uploadTitre.setAuthor_email(user.getEmail());
 
         ofy().save().entity(uploadTitre).now();
 
