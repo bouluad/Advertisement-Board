@@ -182,7 +182,7 @@
             <form action="<%= blobstoreService.createUploadUrl("/") %>" method="post" enctype="multipart/form-data">
 
                 <table>
-
+              
                     <tr>
                         <th><label>Image </label></th>
                         <td><input type="file" name="uploadedFile"/></td>
