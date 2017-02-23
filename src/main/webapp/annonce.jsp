@@ -58,13 +58,7 @@
             <div class="row-fluid iconlist" id="list">
 
                 <h2>Liste des annonces</h2>
-
-                <p>
-                    <span class="label">Note</span> Seules les 9 dernières icônes
-                    uploadées sont présentées ici.
-                </p>
-
-
+                
                 <%
                     List<Upload> uploads = (List<Upload>) request.getAttribute("uploads");
                     if (uploads.size() == 0) {
