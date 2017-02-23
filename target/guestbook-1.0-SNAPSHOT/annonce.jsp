@@ -2,6 +2,9 @@
 <%@ page import="com.example.guestbook.Upload" %>
 <%@ page import="com.google.appengine.api.blobstore.BlobstoreService" %>
 <%@ page import="com.google.appengine.api.blobstore.BlobstoreServiceFactory" %>
+<%@ page import="com.google.appengine.api.users.User" %>
+<%@ page import="com.google.appengine.api.users.UserService" %>
+<%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
 <%@ page import="java.util.List" %>
 
 <%
@@ -34,6 +37,25 @@
             <li class="active"><a href="/">Accueil</a></li>
             <li><a href="#list">Liste des annonces</a></li>
             <li><a href="#upload">Ajouter</a></li>
+
+            <%
+                UserService userService = UserServiceFactory.getUserService();
+                User user = userService.getCurrentUser();
+                if (user != null) {
+                    pageContext.setAttribute("user", user);
+            %>
+
+            <li><a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">Déconnexion</a></li>
+
+            <%
+            } else {
+            %>
+            <li><a href="<%= userService.createLoginURL(request.getRequestURI()) %>">se connecter</a></li>
+            <%
+                }
+            %>
+
+
         </ul>
         <h3 class="text-muted">Advertisement Board</h3>
     </div>
@@ -49,18 +71,17 @@
         <hr/>
 
 
-        <form action="" method="post" enctype="multipart/form-data">
+        <form action="/annonce.jsp" method="get" enctype="multipart/form-data">
 
             <table>
 
-
                 <tr>
-                    <td class="margel"><label>Prix &nbsp;&nbsp;&nbsp;</label></td>
-                    <td class="margel"><input type="text" name="search" placeholder="Search.."/>&nbsp;&nbsp;&nbsp;</td>
+                    <td><label>Prix &nbsp;&nbsp;&nbsp;</label></td>
+                    <td><input type="text" name="search" placeholder="Search.."/>&nbsp;&nbsp;&nbsp;</td>
                     <td>
                         <div class="form-actions">
                             <input class="btn-success" type="submit" class="btn"
-                                   placeholder="Rechercher"/>
+                                   value="Rechercher"/>
                         </div>
                     </td>
                 </tr>

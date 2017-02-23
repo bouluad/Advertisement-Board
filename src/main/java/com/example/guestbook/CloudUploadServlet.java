@@ -3,6 +3,9 @@ package com.example.guestbook;
 import com.google.appengine.api.blobstore.BlobKey;
 import com.google.appengine.api.blobstore.BlobstoreService;
 import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.googlecode.objectify.ObjectifyService;
 
 import javax.servlet.ServletException;
@@ -23,6 +26,10 @@ public class CloudUploadServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException, ServletException {
+
+        UserService userService = UserServiceFactory.getUserService();
+        User user = userService.getCurrentUser();  // Find out who the user is.
+
         BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
 
         // Récupère les derniers uploads
