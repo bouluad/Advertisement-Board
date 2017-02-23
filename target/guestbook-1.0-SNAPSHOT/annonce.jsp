@@ -46,6 +46,28 @@
         </h1>
         <p class="lead">En un clic, ajouter votre annonce!</p>
         <a class="btn btn-large btn-success" href="#upload">Ajouter une annonce</a>
+        <hr/>
+
+
+        <form action="" method="post" enctype="multipart/form-data">
+
+            <table>
+
+                <tr>
+                    <th><input type="text" name="search" placeholder="Search.."></th>
+                    <td>
+                        <div class="form-actions">
+                            <input class="btn-success" type="submit" class="btn"
+                                   placeholder="Rechercher"/>
+                        </div>
+                    </td>
+                </tr>
+
+            </table>
+
+        </form>
+
+
     </div>
 
     <hr/>
@@ -58,12 +80,6 @@
             <div class="row-fluid iconlist" id="list">
 
                 <h2>Liste des annonces</h2>
-
-                <p>
-                    <span class="label">Note</span> Seules les 9 dernières icônes
-                    uploadées sont présentées ici.
-                </p>
-
 
                 <%
                     List<Upload> uploads = (List<Upload>) request.getAttribute("uploads");
