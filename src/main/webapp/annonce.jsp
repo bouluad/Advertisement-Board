@@ -49,16 +49,17 @@
         <hr/>
 
 
-        <form action="" method="post" enctype="multipart/form-data">
+        <form action="/annonce.jsp" method="get" enctype="multipart/form-data">
 
             <table>
 
                 <tr>
-                    <th><input type="text" name="search" placeholder="Search.."></th>
+                    <td><label>Prix &nbsp;&nbsp;&nbsp;</label></td>
+                    <td><input type="text" name="search" placeholder="Search.."/>&nbsp;&nbsp;&nbsp;</td>
                     <td>
                         <div class="form-actions">
                             <input class="btn-success" type="submit" class="btn"
-                                   placeholder="Rechercher"/>
+                                   value="Rechercher"/>
                         </div>
                     </td>
                 </tr>

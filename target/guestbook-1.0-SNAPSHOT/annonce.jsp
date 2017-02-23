@@ -53,8 +53,10 @@
 
             <table>
 
+
                 <tr>
-                    <th><input type="text" name="search" placeholder="Search.."></th>
+                    <td class="margel"><label>Prix &nbsp;&nbsp;&nbsp;</label></td>
+                    <td class="margel"><input type="text" name="search" placeholder="Search.."/>&nbsp;&nbsp;&nbsp;</td>
                     <td>
                         <div class="form-actions">
                             <input class="btn-success" type="submit" class="btn"
